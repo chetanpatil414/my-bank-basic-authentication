@@ -11,7 +11,7 @@
 	<groupId>com.mybank</groupId>
 	<artifactId>my-bank-of-india</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>my-bank-of-india</name>
+	<name>my-bank-custom-authentication</name>
 	<description>my bank of india project</description>
 	<url/>
 	<licenses>
