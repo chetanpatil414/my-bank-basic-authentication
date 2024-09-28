@@ -18,6 +18,7 @@ import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
@@ -27,8 +28,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception{
         CsrfTokenRequestAttributeHandler requestHandle = new CsrfTokenRequestAttributeHandler();
         requestHandle.setCsrfRequestAttributeName("_csrf");
-        httpSecurity.securityContext(contextConfig-> contextConfig.requireExplicitSave(false))
-                .sessionManagement(sessionConfig->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+        httpSecurity.sessionManagement(sessionConfig->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(corsCustomizer->corsCustomizer.configurationSource(new CorsConfigurationSource() {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
@@ -37,6 +37,7 @@ public class SecurityConfig {
                 corsConfiguration.setAllowedMethods(Collections.singletonList("*"));
                 corsConfiguration.setAllowCredentials(true);
                 corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
+                corsConfiguration.setExposedHeaders(Arrays.asList("Authorization"));
                 corsConfiguration.setMaxAge(3600l);
 
                 return corsConfiguration;
