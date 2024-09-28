@@ -10,7 +10,7 @@ public class SampleClass {
 
     @PostMapping("/user")
     public String data(@RequestBody LoginRequestDTO loginRequestDTO){
-        System.out.println(loginRequestDTO.userName());
+            System.out.println(loginRequestDTO.userName());
         return loginRequestDTO.userName();
     }
 }
